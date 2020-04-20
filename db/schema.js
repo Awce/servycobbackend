@@ -13,11 +13,35 @@ const typeDefs = gql`
     token: String
   }
 
+  type Cliente {
+    id: ID
+    empresa: String
+    razonsocial: String
+    rfc: String
+    direccion: String
+    email: String
+    telefono: String
+    logo: String
+    web: String
+    creado: String
+  }
+
   input UsuarioInput {
     nombre: String!
     apellido: String!
     email: String!
     password: String!
+  }
+
+  input ClienteInput {
+    empresa: String!
+    razonsocial: String!
+    rfc: String
+    direccion: String!
+    email: String!
+    telefono: String
+    logo: String
+    web: String
   }
 
   input AutenticarInput {
@@ -26,12 +50,16 @@ const typeDefs = gql`
   }
 
   type Query {
+    # Usuario
     obteneUsuario(token: String!): Usuario
   }
 
   type Mutation {
+    # Usuario
     nuevoUsuario(input: UsuarioInput): Usuario
     autenticarUsuario(input: AutenticarInput): Token
+    # Cliente
+    nuevoCliente(input: ClienteInput): Cliente
   }
 `;
 

@@ -1,5 +1,6 @@
 //Data
 const Usuario = require("../models/Usuario");
+const Cliente = require("../models/Cliente");
 const bcrypjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "variables.env" });
@@ -61,6 +62,22 @@ const resolvers = {
       return {
         token: crearToken(existeUsuario, process.env.SECRETA, "24h"),
       };
+    },
+    nuevoCliente: async (_, { input }) => {
+      const { email } = input;
+      // validar que no exista
+      const existeCliente = await Cliente.findOne({ email });
+      if (existeCliente) {
+        throw new Error("Cliente ya registrado");
+      }
+      // guardar en la bd
+      try {
+        const nuevoCliente = new Cliente(input);
+        const resultado = await nuevoCliente.save();
+        return resultado;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
