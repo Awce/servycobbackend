@@ -26,9 +26,28 @@ const typeDefs = gql`
     creado: String
   }
 
+  type Dictamen {
+    id: ID
+    dictamen: String
+    subdicatem: String
+    razon: String
+    folio: Int
+    monto: Float
+    fechapago: String
+    comentarios: String
+    gestor: ID
+    dama: ID
+    creado: String
+  }
+
   input UsuarioInput {
     nombre: String!
     apellido: String!
+    email: String!
+    password: String!
+  }
+
+  input AutenticarInput {
     email: String!
     password: String!
   }
@@ -44,14 +63,26 @@ const typeDefs = gql`
     web: String
   }
 
-  input AutenticarInput {
-    email: String!
-    password: String!
+  input DictamenInput {
+    dictamen: String!
+    subdicatem: String!
+    razon: String!
+    folio: Int
+    monto: Float
+    fechapago: String
+    comentarios: String
   }
 
   type Query {
     # Usuario
     obteneUsuario(token: String!): Usuario
+    obtenerUsuarios: [Usuario]
+    # Cliente
+    obtenerClientes: [Cliente]
+    obtenerCliente(id: ID!): Cliente
+    # Dictamen
+    obtenerDictamenes: [Dictamen]
+    obtenerDictamenDama: [Dictamen]
   }
 
   type Mutation {
@@ -60,6 +91,10 @@ const typeDefs = gql`
     autenticarUsuario(input: AutenticarInput): Token
     # Cliente
     nuevoCliente(input: ClienteInput): Cliente
+    actualizarCliente(id: ID!, input: ClienteInput): Cliente
+    eliminarCliente(id: ID!): String
+    # Dictamen
+    nuevoDictamen(input: DictamenInput): Dictamen
   }
 `;
 

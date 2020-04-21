@@ -1,6 +1,7 @@
 //Data
 const Usuario = require("../models/Usuario");
 const Cliente = require("../models/Cliente");
+const Dictamen = require("../models/Dictamen");
 const bcrypjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "variables.env" });
@@ -18,7 +19,33 @@ const resolvers = {
       const usuarioID = await jwt.verify(token, process.env.SECRETA);
       return usuarioID;
     },
+    obtenerUsuarios: async () => {
+      try {
+        const usuarios = await Usuario.find({});
+        return usuarios;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerClientes: async () => {
+      try {
+        const clientes = await Cliente.find({});
+        return clientes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerCliente: async (_, { id }) => {
+      // revisar si existe
+      const cliente = await Cliente.findById(id);
+      if (!cliente) {
+        throw new Error("El cliente no se encontro");
+      }
+      // si pasa la se retorna el cliente
+      return cliente;
+    },
   },
+
   Mutation: {
     nuevoUsuario: async (_, { input }) => {
       const { email, password } = input;
@@ -78,6 +105,31 @@ const resolvers = {
       } catch (error) {
         console.log(error);
       }
+    },
+    actualizarCliente: async (_, { id, input }) => {
+      // verificar si existe
+      let cliente = await Cliente.findById(id);
+      if (!cliente) {
+        throw new Error("El cliente no existe");
+      }
+      // guardar
+      cliente = await Cliente.findOneAndUpdate({ _id: id }, input, {
+        new: true,
+      });
+      return cliente;
+    },
+    eliminarCliente: async (_, { id }) => {
+      // verificar si existe
+      let cliente = await Cliente.findById(id);
+      if (!cliente) {
+        throw new Error("El cliente no existe");
+      }
+      // se elimina de la bd
+      await Cliente.findOneAndDelete({ _id: id });
+      return "Cliente eliminado";
+    },
+    nuevoDictamen: async (_, { input }, ctx) => {
+      console.log("test");
     },
   },
 };
