@@ -6,6 +6,7 @@ const typeDefs = gql`
     nombre: String
     apellido: String
     email: String
+    tipousuario: TipoDeUsuario
     creado: String
   }
 
@@ -45,6 +46,13 @@ const typeDefs = gql`
     apellido: String!
     email: String!
     password: String!
+    tipousuario: TipoDeUsuario
+  }
+
+  enum TipoDeUsuario {
+    Admin
+    Gestor
+    Desarrollador
   }
 
   input AutenticarInput {

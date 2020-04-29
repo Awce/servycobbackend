@@ -22,6 +22,10 @@ const UsuariosSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  tipousuario: {
+    type: String,
+    default: "Gestor",
+  },
   creado: {
     type: Date,
     default: Date.now(),
