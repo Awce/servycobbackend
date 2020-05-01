@@ -26,6 +26,10 @@ const UsuariosSchema = mongoose.Schema({
     type: String,
     default: "Gestor",
   },
+  avatar: {
+    type: String,
+    trim: true,
+  },
   creado: {
     type: Date,
     default: Date.now(),

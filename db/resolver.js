@@ -2,24 +2,28 @@
 const Usuario = require("../models/Usuario");
 const Cliente = require("../models/Cliente");
 const Dictamen = require("../models/Dictamen");
+
 const bcrypjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "variables.env" });
 
 const crearToken = (usuario, secreta, expiresIn) => {
   console.log(usuario);
-  const { id, email, nombre, apellido, tipousuario } = usuario;
-  return jwt.sign({ id, email, nombre, apellido, tipousuario }, secreta, {
-    expiresIn,
-  });
+  const { id, email, nombre, apellido, avatar, tipousuario } = usuario;
+  return jwt.sign(
+    { id, email, nombre, apellido, avatar, tipousuario },
+    secreta,
+    {
+      expiresIn,
+    }
+  );
 };
 
 //Resolver
 const resolvers = {
   Query: {
-    obteneUsuario: async (_, { token }) => {
-      const usuarioID = await jwt.verify(token, process.env.SECRETA);
-      return usuarioID;
+    obtenerUsuario: async (_, {}, ctx) => {
+      return ctx.usuario;
     },
     obtenerUsuarios: async () => {
       try {

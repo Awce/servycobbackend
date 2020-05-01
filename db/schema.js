@@ -6,6 +6,7 @@ const typeDefs = gql`
     nombre: String
     apellido: String
     email: String
+    avatar: String
     tipousuario: TipoDeUsuario
     creado: String
   }
@@ -46,6 +47,7 @@ const typeDefs = gql`
     apellido: String!
     email: String!
     password: String!
+    avatar: String
     tipousuario: TipoDeUsuario
   }
 
@@ -83,7 +85,7 @@ const typeDefs = gql`
 
   type Query {
     # Usuario
-    obteneUsuario(token: String!): Usuario
+    obtenerUsuario: Usuario
     obtenerUsuarios: [Usuario]
     # Cliente
     obtenerClientes: [Cliente]
