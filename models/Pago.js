@@ -1,52 +1,55 @@
 const mongoose = require("mongoose");
 
-const ClientesSchema = mongoose.Schema({
-  empresa: {
+const PagosSchema = mongoose.Schema({
+  fechaentrega: {
     type: String,
     required: true,
     trim: true,
   },
-  razonsocial: {
+  numdama: {
     type: String,
     required: true,
     trim: true,
   },
-  rfc: {
-    type: String,
-    trim: true,
-  },
-  direccion: {
+  cliente: {
     type: String,
     required: true,
     trim: true,
   },
-  email: {
+  aniocampaniasaldo: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
+  fecha: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
-  telefono: {
+  saldoanterior: {
     type: String,
+    required: true,
     trim: true,
   },
-  logo: {
+  pago: {
     type: String,
+    required: true,
     trim: true,
   },
-  web: {
+  saldoactual: {
     type: String,
+    required: true,
+    trim: true,
+  },
+  tipopago: {
+    type: String,
+    required: true,
     trim: true,
   },
   creado: {
     type: Date,
     default: Date.now(),
   },
-  // dama: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: "Asignacion",
-  // },
 });
 
-module.exports = mongoose.model("Cliente", ClientesSchema);
+module.exports = mongoose.model("Pago", PagosSchema);

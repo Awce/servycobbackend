@@ -1,6 +1,8 @@
 const { gql } = require("apollo-server");
 //Schema
 const typeDefs = gql`
+  # Types
+
   type Usuario {
     id: ID
     nombre: String
@@ -31,16 +33,56 @@ const typeDefs = gql`
   type Dictamen {
     id: ID
     dictamen: String
-    subdicatem: String
+    subdictamen: String
     razon: String
     folio: Int
     monto: Float
     fechapago: String
     comentarios: String
     gestor: ID
-    dama: ID
+    #dama: ID
     creado: String
   }
+
+  type Asignacion {
+    id: ID
+    tipocartera: String
+    numdama: String
+    digitodama: String
+    nombre: String
+    numerozonafacturacion: Int
+    aniocampaniasaldo: Int
+    diasmora: String
+    campanasvencidas: Int
+    saldofactura: Float
+    saldocobro: Float
+    cargosmoratorios: Float
+    totalacobrar: Float
+    telefonocasa: String
+    telefonocelular: String
+    direccion: String
+    colonia: String
+    referencia: String
+    poblacion: String
+    estado: String
+    codigopostal: String
+    fechafacturacion: String
+    fechafinalvigencia: String
+    tipocuenta: String
+    gestor: ID
+  }
+
+  type TotalAsignaciones {
+    total: Int
+    gestor: [Usuario]
+  }
+
+  type TotalAsignacionesRealizadas {
+    total: Int
+    gestor: [Usuario]
+  }
+
+  # Inputs
 
   input UsuarioInput {
     nombre: String!
@@ -52,8 +94,9 @@ const typeDefs = gql`
   }
 
   enum TipoDeUsuario {
-    Admin
+    Administrador
     Gestor
+    Supervisor
     Desarrollador
   }
 
@@ -66,7 +109,7 @@ const typeDefs = gql`
     empresa: String!
     razonsocial: String!
     rfc: String
-    direccion: String!
+    direccion: String
     email: String!
     telefono: String
     logo: String
@@ -75,7 +118,7 @@ const typeDefs = gql`
 
   input DictamenInput {
     dictamen: String!
-    subdicatem: String!
+    subdictamen: String!
     razon: String!
     folio: Int
     monto: Float
@@ -87,12 +130,19 @@ const typeDefs = gql`
     # Usuario
     obtenerUsuario: Usuario
     obtenerUsuarios: [Usuario]
+    obtenerUsario(id: ID!): Usuario
     # Cliente
     obtenerClientes: [Cliente]
     obtenerCliente(id: ID!): Cliente
     # Dictamen
     obtenerDictamenes: [Dictamen]
+    obtenerDictamenesUsuario: [Dictamen]
     obtenerDictamenDama: [Dictamen]
+    obtenerDictamen(id: ID!): Dictamen
+    # Asignacion
+    obtenerAsignaciones: [Asignacion]
+    obtenerAsignacionesUsuario: [Asignacion]
+    obtenerAsignacion(id: ID!): Asignacion
   }
 
   type Mutation {

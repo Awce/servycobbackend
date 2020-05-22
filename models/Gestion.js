@@ -30,4 +30,4 @@ const GestionesSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Gestiones", GestionesSchema);
+module.exports = mongoose.model("Gestion", GestionesSchema);

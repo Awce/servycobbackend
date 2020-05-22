@@ -2,6 +2,7 @@
 const Usuario = require("../models/Usuario");
 const Cliente = require("../models/Cliente");
 const Dictamen = require("../models/Dictamen");
+const Asignacion = require("../models/Asignacion");
 
 const bcrypjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -49,6 +50,42 @@ const resolvers = {
       }
       // si pasa la se retorna el cliente
       return cliente;
+    },
+    obtenerDictamenes: async () => {
+      try {
+        const dictamenes = await Dictamen.find({});
+        return dictamenes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerDictamenesUsuario: async (_, {}, ctx) => {
+      try {
+        const dictamenes = await Dictamen.find({
+          gestor: ctx.usuario.id,
+        }).populate("Dictamen");
+        return dictamenes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerAsignaciones: async () => {
+      try {
+        const asignaciones = await Asignacion.find({});
+        return asignaciones;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerAsignacionesUsuario: async (_, {}, ctx) => {
+      try {
+        const asignaciones = await Asignacion.find({
+          gestor: ctx.usuario.id,
+        }).populate("Asignacion");
+        return asignaciones;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 
@@ -135,7 +172,16 @@ const resolvers = {
       return "Cliente eliminado";
     },
     nuevoDictamen: async (_, { input }, ctx) => {
-      console.log("test");
+      const nuevoDictamen = new Dictamen(input);
+      // asignar el usuario
+      nuevoDictamen.gestor = ctx.usuario.id;
+      // guardar en la bd
+      try {
+        const resultado = await nuevoDictamen.save();
+        return resultado;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

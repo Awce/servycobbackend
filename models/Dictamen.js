@@ -41,11 +41,11 @@ const DictaminacionesSchema = mongoose.Schema({
     required: true,
     ref: "Usuario",
   },
-  dama: {
-    type: mongoose.SchemaTypes.ObjectId,
-    required: true,
-    ref: "Asignacion",
-  },
+  // dama: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: "Asignacion",
+  // },
 });
 
 module.exports = mongoose.model("Dictaminacion", DictaminacionesSchema);
