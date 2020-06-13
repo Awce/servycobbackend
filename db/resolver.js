@@ -34,6 +34,13 @@ const resolvers = {
         console.log(error);
       }
     },
+    obtenerDetallesUsuario: async (_, { id }) => {
+      const usuario = await Usuario.findById(id);
+      if (!usuario) {
+        throw new Error("El usuario no existe");
+      }
+      return usuario;
+    },
     obtenerClientes: async () => {
       try {
         const clientes = await Cliente.find({});
@@ -69,6 +76,16 @@ const resolvers = {
         console.log(error);
       }
     },
+    obtenerDictamenDama: async (_, { id }) => {
+      try {
+        const dictamenes = await Dictamen.find({ dama: id }).populate(
+          "Dictamen"
+        );
+        return dictamenes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     obtenerAsignaciones: async () => {
       try {
         const asignaciones = await Asignacion.find({});
@@ -86,6 +103,13 @@ const resolvers = {
       } catch (error) {
         console.log(error);
       }
+    },
+    obtenerAsignacion: async (_, { id }) => {
+      const asignacion = await Asignacion.findById(id);
+      if (!asignacion) {
+        throw new Error("La Dama no se encontro");
+      }
+      return asignacion;
     },
   },
 
