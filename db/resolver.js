@@ -76,16 +76,16 @@ const resolvers = {
         console.log(error);
       }
     },
-    obtenerDictamenDama: async (_, { id }) => {
-      try {
-        const dictamenes = await Dictamen.find({ dama: id }).populate(
-          "Dictamen"
-        );
-        return dictamenes;
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    // obtenerDictamenDama: async (_, { id }) => {
+    //   try {
+    //     const dictamenes = await Dictamen.find({ dama: id }).populate(
+    //       "Dictamen"
+    //     );
+    //     return dictamenes;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
     obtenerAsignaciones: async () => {
       try {
         const asignaciones = await Asignacion.find({});

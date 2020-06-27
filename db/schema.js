@@ -40,7 +40,7 @@ const typeDefs = gql`
     fechapago: String
     comentarios: String
     gestor: ID
-    dama: ID
+    # dama: ID
     creado: String
   }
 
@@ -124,7 +124,7 @@ const typeDefs = gql`
     monto: Float
     fechapago: String
     comentarios: String
-    dama: String
+    # dama: String
   }
 
   type Query {
@@ -139,7 +139,7 @@ const typeDefs = gql`
     # Dictamen
     obtenerDictamenes: [Dictamen]
     obtenerDictamenesUsuario: [Dictamen]
-    obtenerDictamenDama(id: ID): [Dictamen]
+    #obtenerDictamenDama(id: ID): [Dictamen]
     obtenerDictamen(id: ID!): Dictamen
     # Asignacion
     obtenerAsignaciones: [Asignacion]
