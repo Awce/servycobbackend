@@ -1,6 +1,16 @@
 const mongoose = require("mongoose");
 
 const DictaminacionesSchema = mongoose.Schema({
+  numdama: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  digitodama: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   dictamen: {
     type: String,
     required: true,
@@ -17,11 +27,12 @@ const DictaminacionesSchema = mongoose.Schema({
     trim: true,
   },
   folio: {
-    type: Number,
+    type: String,
     trim: true,
   },
   monto: {
     type: Number,
+    default: 0,
     trim: true,
   },
   fechapago: {
@@ -30,6 +41,7 @@ const DictaminacionesSchema = mongoose.Schema({
   },
   comentarios: {
     type: String,
+    required: true,
     trim: true,
   },
   creado: {

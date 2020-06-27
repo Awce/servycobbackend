@@ -32,11 +32,13 @@ const typeDefs = gql`
 
   type Dictamen {
     id: ID
+    numdama: String
+    digitodama: String
     dictamen: String
     subdictamen: String
     razon: String
-    folio: Int
-    monto: Float
+    folio: String
+    monto: Int
     fechapago: String
     comentarios: String
     gestor: ID
@@ -117,13 +119,15 @@ const typeDefs = gql`
   }
 
   input DictamenInput {
+    numdama: String!
+    digitodama: String!
     dictamen: String!
     subdictamen: String!
     razon: String!
-    folio: Int
+    folio: String
     monto: Float
     fechapago: String
-    comentarios: String
+    comentarios: String!
     # dama: String
   }
 
