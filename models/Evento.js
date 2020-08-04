@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const EventosSchema = mongose.Schema({
+const EventosSchema = mongoose.Schema({
   tipoevento: {
     type: String,
     default: "Cobranza",
@@ -12,7 +12,7 @@ const EventosSchema = mongose.Schema({
     trim: true,
   },
   fecha: {
-    type: Date,
+    type: String,
     required: true,
   },
   usuario: {

@@ -84,6 +84,15 @@ const typeDefs = gql`
     gestor: [Usuario]
   }
 
+  type Evento {
+    id: ID
+    tipoevento: TipoDeEvento
+    nombre: String
+    fecha: String
+    usuario: String
+    creado: String
+  }
+
   # Inputs
 
   input UsuarioInput {
@@ -131,6 +140,18 @@ const typeDefs = gql`
     # dama: String
   }
 
+  input EventoInput {
+    tipoevento: TipoDeEvento
+    nombre: String!
+    fecha: String!
+  }
+
+  enum TipoDeEvento {
+    Cobranza
+    Visita
+    Llamada
+  }
+
   type Query {
     # Usuario
     obtenerUsuario: Usuario
@@ -149,6 +170,10 @@ const typeDefs = gql`
     obtenerAsignaciones: [Asignacion]
     obtenerAsignacionesUsuario: [Asignacion]
     obtenerAsignacion(id: ID!): Asignacion
+    # Evento
+    obtenerEventos: [Evento]
+    obtenerEventosUsuario: [Evento]
+    obtenerEvento(id: ID): [Evento]
   }
 
   type Mutation {
@@ -161,6 +186,8 @@ const typeDefs = gql`
     eliminarCliente(id: ID!): String
     # Dictamen
     nuevoDictamen(input: DictamenInput): Dictamen
+    # Evento
+    nuevoEvento(input: EventoInput): Evento
   }
 `;
 

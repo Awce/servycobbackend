@@ -3,6 +3,7 @@ const Usuario = require("../models/Usuario");
 const Cliente = require("../models/Cliente");
 const Dictamen = require("../models/Dictamen");
 const Asignacion = require("../models/Asignacion");
+const Evento = require("../models/Evento");
 
 const bcrypjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -111,6 +112,31 @@ const resolvers = {
       }
       return asignacion;
     },
+    obtenerEventos: async () => {
+      try {
+        const eventos = await Evento.find({});
+        return eventos;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerEventosUsuario: async (_, {}, ctx) => {
+      try {
+        const eventos = await Evento.find({
+          usuario: ctx.usuario.id,
+        }).populate("Evento");
+        return eventos;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerEvento: async (_, { id }) => {
+      const evento = await Evento.findById(id);
+      if (!evento) {
+        throw new Error("No hay eventos");
+      }
+      return evento;
+    },
   },
 
   Mutation: {
@@ -202,6 +228,18 @@ const resolvers = {
       // guardar en la bd
       try {
         const resultado = await nuevoDictamen.save();
+        return resultado;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    nuevoEvento: async (_, { input }, ctx) => {
+      const nuevoEvento = new Evento(input);
+      // asignamos el usuario
+      nuevoEvento.usuario = ctx.usuario.id;
+      // guardamos en la bd
+      try {
+        const resultado = await nuevoEvento.save();
         return resultado;
       } catch (error) {
         console.log(error);
