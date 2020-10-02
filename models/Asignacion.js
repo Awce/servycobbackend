@@ -6,6 +6,10 @@ const AsignacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  cv: {
+    type: String,
+    trim: true,
+  },
   numdama: {
     type: String,
     required: true,
@@ -31,16 +35,6 @@ const AsignacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  diasmora: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  campanasvencidas: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
   nombregerente: {
     type: String,
     trim: true,
@@ -54,24 +48,17 @@ const AsignacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  cargosmoratorios: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  totalacobrar: {
+  saldoactual: {
     type: Number,
     required: true,
     trim: true,
   },
   telefonocasa: {
     type: String,
-    required: true,
     trim: true,
   },
   telefonocelular: {
     type: String,
-    required: true,
     trim: true,
   },
   direccion: {
@@ -101,7 +88,6 @@ const AsignacionesSchema = mongoose.Schema({
   },
   codigopostal: {
     type: String,
-    required: true,
     trim: true,
   },
   fechafacturacion: {
@@ -114,10 +100,14 @@ const AsignacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  tipocuenta: {
+  descsituacion: {
     type: String,
-    required: true,
     trim: true,
+  },
+  cliente: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Cliente",
   },
   gestor: {
     type: mongoose.Schema.Types.ObjectId,
