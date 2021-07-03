@@ -79,18 +79,9 @@ const typeDefs = gql`
     gestor: [Usuario]
   }
 
-  type TotalAsignacionesRealizadas {
+  type TotalGestiones {
     total: Int
     gestor: [Usuario]
-  }
-
-  type Evento {
-    id: ID
-    tipoevento: TipoDeEvento
-    nombre: String
-    fecha: String
-    usuario: String
-    creado: String
   }
 
   # Inputs
@@ -137,19 +128,6 @@ const typeDefs = gql`
     monto: Float
     fechapago: String
     comentarios: String!
-    # dama: String
-  }
-
-  input EventoInput {
-    tipoevento: TipoDeEvento
-    nombre: String!
-    fecha: String!
-  }
-
-  enum TipoDeEvento {
-    Cobranza
-    Visita
-    Llamada
   }
 
   type Query {
@@ -170,10 +148,6 @@ const typeDefs = gql`
     obtenerAsignaciones: [Asignacion]
     obtenerAsignacionesUsuario: [Asignacion]
     obtenerAsignacion(id: ID!): Asignacion
-    # Evento
-    obtenerEventos: [Evento]
-    obtenerEventosUsuario: [Evento]
-    obtenerEvento(id: ID): [Evento]
   }
 
   type Mutation {
@@ -186,8 +160,8 @@ const typeDefs = gql`
     eliminarCliente(id: ID!): String
     # Dictamen
     nuevoDictamen(input: DictamenInput): Dictamen
-    # Evento
-    nuevoEvento(input: EventoInput): Evento
+    # # Evento
+    # nuevoEvento(input: EventoInput): Evento
   }
 `;
 
