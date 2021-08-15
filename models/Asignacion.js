@@ -53,6 +53,11 @@ const AsignacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  totalacobrar: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
   telefonocasa: {
     type: String,
     trim: true,

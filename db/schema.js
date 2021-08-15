@@ -42,7 +42,7 @@ const typeDefs = gql`
     fechapago: String
     comentarios: String
     gestor: ID
-    # dama: ID
+    asignacion: ID
     creado: String
   }
 
@@ -72,6 +72,7 @@ const typeDefs = gql`
     fechafinalvigencia: String
     tipocuenta: String
     gestor: ID
+    creado: String
   }
 
   type TotalAsignaciones {
@@ -118,6 +119,32 @@ const typeDefs = gql`
     web: String
   }
 
+  input AsignacionInput {
+    tipocartera: String
+    numdama: String
+    digitodama: String
+    nombre: String
+    numerozonafacturacion: Int
+    aniocampaniasaldo: Int
+    diasmora: String
+    campanasvencidas: Int
+    saldofactura: Float
+    saldocobro: Float
+    cargosmoratorios: Float
+    totalacobrar: Float
+    telefonocasa: String
+    telefonocelular: String
+    direccion: String
+    colonia: String
+    referencia: String
+    poblacion: String
+    estado: String
+    codigopostal: String
+    fechafacturacion: String
+    fechafinalvigencia: String
+    tipocuenta: String
+  }
+
   input DictamenInput {
     numdama: String!
     digitodama: String!
@@ -158,10 +185,10 @@ const typeDefs = gql`
     nuevoCliente(input: ClienteInput): Cliente
     actualizarCliente(id: ID!, input: ClienteInput): Cliente
     eliminarCliente(id: ID!): String
+    # Asignacion
+    nuevaAsignacion(input: AsignacionInput): Asignacion
     # Dictamen
     nuevoDictamen(input: DictamenInput): Dictamen
-    # # Evento
-    # nuevoEvento(input: EventoInput): Evento
   }
 `;
 
