@@ -120,6 +120,14 @@ const AsignacionesSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
+  latitud: {
+    type: String,
+    trim: true,
+  },
+  longitud: {
+    type: String,
+    trim: true,
+  },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
