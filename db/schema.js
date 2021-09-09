@@ -38,51 +38,58 @@ const typeDefs = gql`
     subdictamen: String
     razon: String
     folio: String
-    monto: Int
+    total: Int
     fechapago: String
     comentarios: String
-    gestor: ID
+    usuario: ID
     asignacion: ID
     creado: String
   }
 
   type Asignacion {
     id: ID
-    tipocartera: String
+    campanaventa: String
+    ruta: String
+    numerozonafacturacion: Int
+    liquidacion: Int
     numdama: String
     digitodama: String
     nombre: String
-    numerozonafacturacion: Int
-    aniocampaniasaldo: Int
-    diasmora: String
-    campanasvencidas: Int
-    saldofactura: Float
-    saldocobro: Float
-    cargosmoratorios: Float
-    totalacobrar: Float
-    telefonocasa: String
-    telefonocelular: String
     direccion: String
     colonia: String
-    referencia: String
     poblacion: String
     estado: String
     codigopostal: String
-    fechafacturacion: String
-    fechafinalvigencia: String
-    tipocuenta: String
-    gestor: ID
+    referencia: String
+    telefonocasa: String
+    telefonocelular: String
+    totalacobrar: Float
+    aniocampaniasaldo: Int
+    campanasvencidas: Int
+    cau: String
+    idsituacion: String
+    descsituacion: String
+    idsituacioncie: String
+    descsituacioncie: String
+    tipocartera: String
+    cierre: String
+    usuario: ID
     creado: String
   }
 
   type TotalAsignaciones {
     total: Int
-    gestor: [Usuario]
+    usuario: [Usuario]
   }
 
   type TotalGestiones {
     total: Int
-    gestor: [Usuario]
+    usuario: [Usuario]
+  }
+
+  type TopUsuarios {
+    total: Float
+    usuario: [Usuario]
   }
 
   # Inputs
@@ -119,32 +126,6 @@ const typeDefs = gql`
     web: String
   }
 
-  input AsignacionInput {
-    tipocartera: String
-    numdama: String
-    digitodama: String
-    nombre: String
-    numerozonafacturacion: Int
-    aniocampaniasaldo: Int
-    diasmora: String
-    campanasvencidas: Int
-    saldofactura: Float
-    saldocobro: Float
-    cargosmoratorios: Float
-    totalacobrar: Float
-    telefonocasa: String
-    telefonocelular: String
-    direccion: String
-    colonia: String
-    referencia: String
-    poblacion: String
-    estado: String
-    codigopostal: String
-    fechafacturacion: String
-    fechafinalvigencia: String
-    tipocuenta: String
-  }
-
   input DictamenInput {
     numdama: String!
     digitodama: String!
@@ -152,9 +133,15 @@ const typeDefs = gql`
     subdictamen: String!
     razon: String!
     folio: String
-    monto: Float
+    total: Float
     fechapago: String
     comentarios: String!
+  }
+
+  input AsignacionInput {
+    numdama: String!
+    digitodama: String!
+    nombre: String!
   }
 
   type Query {
@@ -169,12 +156,16 @@ const typeDefs = gql`
     # Dictamen
     obtenerDictamenes: [Dictamen]
     obtenerDictamenesUsuario: [Dictamen]
-    #obtenerDictamenDama(id: ID): [Dictamen]
     obtenerDictamen(id: ID!): Dictamen
     # Asignacion
     obtenerAsignaciones: [Asignacion]
     obtenerAsignacionesUsuario: [Asignacion]
     obtenerAsignacion(id: ID!): Asignacion
+    # Busqueda
+    buscarAsignacion(texto: String!): [Asignacion]
+    # Reportes
+    mejoresUsuarios: [TopUsuarios]
+    totalAsignaciones: [TotalAsignaciones]
   }
 
   type Mutation {

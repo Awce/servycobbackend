@@ -30,7 +30,7 @@ const DictaminacionesSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  monto: {
+  total: {
     type: Number,
     default: 0,
     trim: true,
@@ -44,20 +44,15 @@ const DictaminacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  creado: {
-    type: Date,
-    default: Date.now(),
-  },
-  gestor: {
+  usuario: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Usuario",
   },
-  // dama: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: "Asignacion",
-  // },
+  creado: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 module.exports = mongoose.model("Dictaminacion", DictaminacionesSchema);

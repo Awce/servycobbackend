@@ -1,13 +1,22 @@
 const mongoose = require("mongoose");
 
 const AsignacionesSchema = mongoose.Schema({
-  tipocartera: {
+  campanaventa: {
     type: String,
+    trim: true,
+  },
+  ruta: {
+    type: String,
+    trim: true,
+  },
+  numerozonafacturacion: {
+    type: Number,
     required: true,
     trim: true,
   },
-  cv: {
-    type: String,
+  liquidacion: {
+    type: Number,
+    required: true,
     trim: true,
   },
   numdama: {
@@ -25,58 +34,12 @@ const AsignacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  numerozonafacturacion: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  aniocampaniasaldo: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  nombregerente: {
-    type: String,
-    trim: true,
-  },
-  saldofactura: {
-    type: Number,
-    trim: true,
-  },
-  saldocobro: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  saldoactual: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  totalacobrar: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  telefonocasa: {
-    type: String,
-    trim: true,
-  },
-  telefonocelular: {
-    type: String,
-    trim: true,
-  },
   direccion: {
     type: String,
     required: true,
     trim: true,
   },
   colonia: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  referencia: {
     type: String,
     required: true,
     trim: true,
@@ -95,26 +58,69 @@ const AsignacionesSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  fechafacturacion: {
+  referencia: {
     type: String,
     required: true,
     trim: true,
   },
-  fechafinalvigencia: {
+  telefonocasa: {
+    type: String,
+    trim: true,
+  },
+  telefonocelular: {
+    type: String,
+    trim: true,
+  },
+  totalacobrar: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
+  aniocampaniasaldo: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  campanasvencidas: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  cau: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  idsituacion: {
     type: String,
     required: true,
     trim: true,
   },
   descsituacion: {
     type: String,
+    required: true,
     trim: true,
   },
-  cliente: {
-    type: mongoose.Schema.Types.ObjectId,
+  idsituacioncie: {
+    type: String,
     required: true,
-    ref: "Cliente",
+    trim: true,
   },
-  gestor: {
+  descsituacioncie: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  tipocartera: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  cierre: {
+    type: String,
+    trim: true,
+  },
+  usuario: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Usuario",
@@ -124,5 +130,7 @@ const AsignacionesSchema = mongoose.Schema({
     default: Date.now(),
   },
 });
+
+AsignacionesSchema.index({ nombre: "text" });
 
 module.exports = mongoose.model("Asignacion", AsignacionesSchema);

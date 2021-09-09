@@ -14,7 +14,7 @@ const GestionesSchema = mongoose.Schema({
     required: true,
     ref: "Cliente",
   },
-  gestor: {
+  usuario: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
     ref: "Usuario",

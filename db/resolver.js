@@ -70,7 +70,7 @@ const resolvers = {
     obtenerDictamenesUsuario: async (_, {}, ctx) => {
       try {
         const dictamenes = await Dictamen.find({
-          gestor: ctx.usuario.id,
+          usuario: ctx.usuario.id,
         }).populate("Dictamen");
         return dictamenes;
       } catch (error) {
@@ -88,7 +88,7 @@ const resolvers = {
     obtenerAsignacionesUsuario: async (_, {}, ctx) => {
       try {
         const asignaciones = await Asignacion.find({
-          gestor: ctx.usuario.id,
+          usuario: ctx.usuario.id,
         }).populate("Asignacion");
         return asignaciones;
       } catch (error) {
@@ -101,6 +101,36 @@ const resolvers = {
         throw new Error("La Dama no se encontro");
       }
       return asignacion;
+    },
+    mejoresUsuarios: async () => {
+      const usuarios = await Dictamen.aggregate([
+        { $match: { razon: "Pago Total" } },
+        {
+          $group: {
+            _id: "$usuario",
+            total: { $sum: "$total" },
+          },
+        },
+        {
+          $lookup: {
+            from: "usuarios",
+            localField: "_id",
+            foreignField: "_id",
+            as: "usuario",
+          },
+        },
+        {
+          $limit: 10,
+        },
+        {
+          $sort: { total: -1 },
+        },
+      ]);
+      return usuarios;
+    },
+    buscarAsignacion: async (_, { texto }) => {
+      const asignaciones = await Asignacion.find({ $text: { $search: texto } });
+      return asignaciones;
     },
   },
 
@@ -189,7 +219,7 @@ const resolvers = {
     nuevaAsignacion: async (_, { input }, ctx) => {
       const nuevaAsignacion = new Asignacion(input);
       //asignar el usuario
-      nuevaAignacion.gestor = ctx.usuario.id;
+      nuevaAignacion.usuario = ctx.usuario.id;
       // guardar en la bd
       try {
         const resultado = await nuevaAsignacion.save();
@@ -201,7 +231,7 @@ const resolvers = {
     nuevoDictamen: async (_, { input }, ctx) => {
       const nuevoDictamen = new Dictamen(input);
       // asignar el usuario
-      nuevoDictamen.gestor = ctx.usuario.id;
+      nuevoDictamen.usuario = ctx.usuario.id;
       // guardar en la bd
       try {
         const resultado = await nuevoDictamen.save();

@@ -42,11 +42,6 @@ const ClientesSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  // dama: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: "Asignacion",
-  // },
 });
 
 module.exports = mongoose.model("Cliente", ClientesSchema);
