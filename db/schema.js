@@ -73,7 +73,7 @@ const typeDefs = gql`
     descsituacioncie: String
     tipocartera: String
     cierre: String
-    latidud: String
+    latitud: String
     longitud: String
     usuario: ID
     creado: String
