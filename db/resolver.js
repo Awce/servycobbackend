@@ -77,6 +77,16 @@ const resolvers = {
         console.log(error);
       }
     },
+    obtenerDictamenesAsignacion: async (_, { asignacion }) => {
+      try {
+        const dictamenes = await Dictamen.find({
+          asignacion: asignacion,
+        }).populate("Dictamen");
+        return dictamenes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     obtenerAsignaciones: async () => {
       try {
         const asignaciones = await Asignacion.find({});

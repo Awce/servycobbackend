@@ -49,6 +49,11 @@ const DictaminacionesSchema = mongoose.Schema({
     required: true,
     ref: "Usuario",
   },
+  asignacion: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Asignacion",
+  },
   creado: {
     type: Date,
     default: Date.now(),

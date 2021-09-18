@@ -129,6 +129,7 @@ const typeDefs = gql`
   }
 
   input DictamenInput {
+    asignacion: String!
     numdama: String!
     digitodama: String!
     dictamen: String!
@@ -158,6 +159,7 @@ const typeDefs = gql`
     # Dictamen
     obtenerDictamenes: [Dictamen]
     obtenerDictamenesUsuario: [Dictamen]
+    obtenerDictamenesAsignacion(asignacion: ID!): [Dictamen]
     obtenerDictamen(id: ID!): Dictamen
     # Asignacion
     obtenerAsignaciones: [Asignacion]
