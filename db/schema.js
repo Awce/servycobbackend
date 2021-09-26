@@ -41,6 +41,7 @@ const typeDefs = gql`
     total: Int
     fechapago: String
     comentarios: String
+    foto: String
     usuario: ID
     asignacion: ID
     creado: String
@@ -139,6 +140,7 @@ const typeDefs = gql`
     total: Float
     fechapago: String
     comentarios: String!
+    foto: String
   }
 
   input AsignacionInput {

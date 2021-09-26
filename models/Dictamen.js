@@ -44,6 +44,10 @@ const DictaminacionesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  foto: {
+    type: String,
+    trim: true,
+  },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
