@@ -17,6 +17,24 @@ const typeDefs = gql`
     token: String
   }
 
+  type Soporte {
+    id: ID
+    nombre: String
+    email: String
+    telefono: String
+    modelo: String
+    ubicacion: String
+    motivollamada: String
+    otro: String
+    producto: String
+    categoria: String
+    motivo: String
+    causa: String
+    comentarios: String
+    usuario: ID
+    dictamen: String
+  }
+
   type Cliente {
     id: ID
     empresa: String
@@ -106,6 +124,22 @@ const typeDefs = gql`
     tipousuario: TipoDeUsuario
   }
 
+  input SoporteInput {
+    nombre: String!
+    email: String!
+    telefono: String!
+    modelo: String!
+    ubicacion: String!
+    motivollamada: String!
+    otro: String
+    producto: String!
+    categoria: String!
+    motivo: String!
+    causa: String!
+    comentarios: String!
+    dictamen: String!
+  }
+
   enum TipoDeUsuario {
     Administrador
     Gestor
@@ -158,6 +192,10 @@ const typeDefs = gql`
     # Cliente
     obtenerClientes: [Cliente]
     obtenerCliente(id: ID!): Cliente
+    # Soporte
+    obtenerSoportes: [Soporte]
+    obtenerSoportesUsuario: [Soporte]
+    obtenerSoporte(id: ID!): Soporte
     # Dictamen
     obtenerDictamenes: [Dictamen]
     obtenerDictamenesUsuario: [Dictamen]
@@ -182,6 +220,8 @@ const typeDefs = gql`
     nuevoCliente(input: ClienteInput): Cliente
     actualizarCliente(id: ID!, input: ClienteInput): Cliente
     eliminarCliente(id: ID!): String
+    # Soporte
+    nuevoSoporte(input: SoporteInput): Soporte
     # Asignacion
     nuevaAsignacion(input: AsignacionInput): Asignacion
     # Dictamen

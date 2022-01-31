@@ -4,6 +4,7 @@ const Cliente = require("../models/Cliente");
 const Dictamen = require("../models/Dictamen");
 const Asignacion = require("../models/Asignacion");
 const Evento = require("../models/Evento");
+const Soporte = require("../models/Soporte");
 
 const bcrypjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -58,6 +59,31 @@ const resolvers = {
       }
       // si pasa la se retorna el cliente
       return cliente;
+    },
+    obtenerSoportes: async () => {
+      try {
+        const soportes = await Soporte.find({});
+        return soportes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerSoportesUsuario: async (_, {}, ctx) => {
+      try {
+        const soportes = await Soporte.find({
+          usuario: ctx.usuario.id,
+        }).populate("Soporte");
+        return soportes;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    obtenerSoporte: async (_, { id }) => {
+      const soporte = await Soporte.findById(id);
+      if (!soporte) {
+        throw new Error("No existe ese folio de soporte");
+      }
+      return soporte;
     },
     obtenerDictamenes: async () => {
       try {
@@ -226,10 +252,22 @@ const resolvers = {
       await Cliente.findOneAndDelete({ _id: id });
       return "Cliente eliminado";
     },
+    nuevoSoporte: async (_, { input }, ctx) => {
+      const crearSoporte = new Soporte(input);
+      // asignar el usario
+      crearSoporte.usuario = ctx.usuario.id;
+      // guardar en la bd
+      try {
+        const resultado = await crearSoporte.save();
+        return resultado;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     nuevaAsignacion: async (_, { input }, ctx) => {
       const nuevaAsignacion = new Asignacion(input);
       //asignar el usuario
-      nuevaAignacion.usuario = ctx.usuario.id;
+      nuevaAsignacion.usuario = ctx.usuario.id;
       // guardar en la bd
       try {
         const resultado = await nuevaAsignacion.save();
