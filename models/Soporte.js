@@ -32,7 +32,7 @@ const SoportesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  otro: {
+  otromotivo: {
     type: String,
     trim: true,
   },
@@ -64,6 +64,10 @@ const SoportesSchema = mongoose.Schema({
   dictamen: {
     type: String,
     required: true,
+    trim: true,
+  },
+  otrodictamen: {
+    type: String,
     trim: true,
   },
   usuario: {

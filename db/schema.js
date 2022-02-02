@@ -25,7 +25,7 @@ const typeDefs = gql`
     modelo: String
     ubicacion: String
     motivollamada: String
-    otro: String
+    otromotivo: String
     producto: String
     categoria: String
     motivo: String
@@ -33,6 +33,7 @@ const typeDefs = gql`
     comentarios: String
     usuario: ID
     dictamen: String
+    otrodictamen: String
   }
 
   type Cliente {
@@ -131,13 +132,14 @@ const typeDefs = gql`
     modelo: String!
     ubicacion: String!
     motivollamada: String!
-    otro: String
+    otromotivo: String
     producto: String!
     categoria: String!
     motivo: String!
     causa: String!
     comentarios: String!
     dictamen: String!
+    otrodictamen: String
   }
 
   enum TipoDeUsuario {
