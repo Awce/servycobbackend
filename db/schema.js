@@ -34,6 +34,7 @@ const typeDefs = gql`
     usuario: ID
     dictamen: String
     otrodictamen: String
+    creado: String
   }
 
   type Cliente {
